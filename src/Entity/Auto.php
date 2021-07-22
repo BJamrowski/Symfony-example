@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\AutoRepository;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -22,6 +23,10 @@ class Auto
      * @ORM\JoinColumn(nullable=false)
      */
     private $idSalon;
+
+    public function __construct(){
+        $this->idSalon = new ArrayCollection();
+    }
 
     /**
      * @ORM\Column(type="string", length=20)
@@ -52,6 +57,8 @@ class Auto
      * @ORM\Column(type="float")
      */
     private $cena;
+
+
 
     public function getId(): ?int
     {
