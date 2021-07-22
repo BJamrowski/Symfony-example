@@ -13,10 +13,9 @@ class SalonType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('nazwa')
-            ->add('miasto')
-            ->add('wlasciciel')
-            ->add('numerTelefonu')
+            ->add('Nazwa')
+            ->add('telefon')
+            ->add('miejscowosc')
             ->add('submit', SubmitType::class)
         ;
     }

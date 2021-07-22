@@ -9,22 +9,20 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-/**
- * @Route("/salon", name="salon.")
- */
 class SalonController extends AbstractController
 {
     /**
-     * @Route("/create", name="new")
+     * @Route("/salon", name="salon")
      */
     public function index(Request $request)
     {
         $salon = new Salon();
 
         $form = $this->createForm(SalonType::class, $salon);
+
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()){
             $salon = $form->getData();
 
             $em = $this->getDoctrine()->getManager();
@@ -33,9 +31,8 @@ class SalonController extends AbstractController
 
             return $this->redirectToRoute('home');
         }
-
-        return $this->render('salon/create.html.twig',[
-            'createNewSalon' => $form->createView(),
+        return $this->render('salon/index.html.twig', [
+            'form' => $form->createView(),
         ]);
     }
 }

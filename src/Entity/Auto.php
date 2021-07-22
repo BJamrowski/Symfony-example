@@ -3,7 +3,6 @@
 namespace App\Entity;
 
 use App\Repository\AutoRepository;
-use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -19,72 +18,34 @@ class Auto
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Salon::class, inversedBy="auta")
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $idSalon;
-
-    public function __construct(){
-        $this->idSalon = new ArrayCollection();
-    }
-
-    /**
      * @ORM\Column(type="string", length=20)
      */
-    private $marka;
+    private $Marka;
 
     /**
-     * @ORM\Column(type="string", length=20)
+     * @ORM\Column(type="string", length=30)
      */
     private $model;
 
     /**
-     * @ORM\Column(type="string", length=15)
+     * @ORM\ManyToOne(targetEntity=Salon::class, inversedBy="auta")
+     * @ORM\JoinColumn(nullable=false)
      */
-    private $typNadwozia;
-
-    /**
-     * @ORM\Column(type="string", length=25)
-     */
-    private $typSilnika;
-
-    /**
-     * @ORM\Column(type="smallint")
-     */
-    private $iloscDrzwi;
-
-    /**
-     * @ORM\Column(type="float")
-     */
-    private $cena;
-
-
+    private $idSalon;
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getIdSalon(): ?Salon
-    {
-        return $this->idSalon;
-    }
-
-    public function setIdSalon(?Salon $idSalon): self
-    {
-        $this->idSalon = $idSalon;
-
-        return $this;
-    }
-
     public function getMarka(): ?string
     {
-        return $this->marka;
+        return $this->Marka;
     }
 
-    public function setMarka(string $marka): self
+    public function setMarka(string $Marka): self
     {
-        $this->marka = $marka;
+        $this->Marka = $Marka;
 
         return $this;
     }
@@ -101,50 +62,14 @@ class Auto
         return $this;
     }
 
-    public function getTypNadwozia(): ?string
+    public function getIdSalon(): ?Salon
     {
-        return $this->typNadwozia;
+        return $this->idSalon;
     }
 
-    public function setTypNadwozia(string $typNadwozia): self
+    public function setIdSalon(?Salon $idSalon): self
     {
-        $this->typNadwozia = $typNadwozia;
-
-        return $this;
-    }
-
-    public function getTypSilnika(): ?string
-    {
-        return $this->typSilnika;
-    }
-
-    public function setTypSilnika(string $typSilnika): self
-    {
-        $this->typSilnika = $typSilnika;
-
-        return $this;
-    }
-
-    public function getIloscDrzwi(): ?int
-    {
-        return $this->iloscDrzwi;
-    }
-
-    public function setIloscDrzwi(int $iloscDrzwi): self
-    {
-        $this->iloscDrzwi = $iloscDrzwi;
-
-        return $this;
-    }
-
-    public function getCena(): ?float
-    {
-        return $this->cena;
-    }
-
-    public function setCena(float $cena): self
-    {
-        $this->cena = $cena;
+        $this->idSalon = $idSalon;
 
         return $this;
     }
