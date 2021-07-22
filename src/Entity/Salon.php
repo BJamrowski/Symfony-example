@@ -20,24 +20,19 @@ class Salon
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=50)
-     */
-    private $nazwa;
-
-    /**
-     * @ORM\Column(type="string", length=30)
-     */
-    private $miasto;
-
-    /**
      * @ORM\Column(type="string", length=40)
      */
-    private $wlasciciel;
+    private $Nazwa;
 
     /**
      * @ORM\Column(type="integer")
      */
-    private $numerTelefonu;
+    private $telefon;
+
+    /**
+     * @ORM\Column(type="string", length=50)
+     */
+    private $miejscowosc;
 
     /**
      * @ORM\OneToMany(targetEntity=Auto::class, mappedBy="idSalon", orphanRemoval=true)
@@ -56,48 +51,36 @@ class Salon
 
     public function getNazwa(): ?string
     {
-        return $this->nazwa;
+        return $this->Nazwa;
     }
 
-    public function setNazwa(string $nazwa): self
+    public function setNazwa(string $Nazwa): self
     {
-        $this->nazwa = $nazwa;
+        $this->Nazwa = $Nazwa;
 
         return $this;
     }
 
-    public function getMiasto(): ?string
+    public function getTelefon(): ?int
     {
-        return $this->miasto;
+        return $this->telefon;
     }
 
-    public function setMiasto(string $miasto): self
+    public function setTelefon(int $telefon): self
     {
-        $this->miasto = $miasto;
+        $this->telefon = $telefon;
 
         return $this;
     }
 
-    public function getWlasciciel(): ?string
+    public function getMiejscowosc(): ?string
     {
-        return $this->wlasciciel;
+        return $this->miejscowosc;
     }
 
-    public function setWlasciciel(string $wlasciciel): self
+    public function setMiejscowosc(string $miejscowosc): self
     {
-        $this->wlasciciel = $wlasciciel;
-
-        return $this;
-    }
-
-    public function getNumerTelefonu(): ?int
-    {
-        return $this->numerTelefonu;
-    }
-
-    public function setNumerTelefonu(int $numerTelefonu): self
-    {
-        $this->numerTelefonu = $numerTelefonu;
+        $this->miejscowosc = $miejscowosc;
 
         return $this;
     }
