@@ -1,6 +1,23 @@
 {% extends('base.html.twig') %}
 
 {% block body %}
-    <h1>Welcome to blog</h1>
-
+{{ form(form) }}
+    {% if cars %}
+        <table style="width:100%">
+            {% for car in cars %}
+                    <tr>
+                        <th>Marka: {{ car.model }}</th>
+                    </tr>
+                    <tr>
+                        <td>Model: {{ car.mark }}</td>
+                    </tr>
+                    <tr>
+                        <td>Rocznik: {{ car.year|date("m/d/Y")}}</td>
+                    </tr>
+                    <tr>
+                        <td>Kolor: {{ car.color }}</td>
+                    </tr>
+            {% endfor %}
+        </table>
+    {% endif %}
 {% endblock %}

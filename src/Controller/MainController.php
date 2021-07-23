@@ -2,7 +2,12 @@
 
 namespace App\Controller;
 
+use App\Entity\CarShowroom;
+use App\Repository\CarRepository;
+use App\Repository\CarShowroomRepository;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -12,23 +17,48 @@ class MainController extends AbstractController
     /**
      * @Route("/", name="home")
      */
-    public function index()
+    public function index(Request $request, CarRepository $carRepository)
     {
-        return $this->render('home/index.html.twig');
-    }
+        //$carShowroom = $carShowroomRepository->findAll();
+        $form = $this->createFormBuilder(null)
+            ->add('carShowroom',EntityType::class, [
+                'class'=>'App\Entity\CarShowroom',
+            ])
+            ->add('submit',SubmitType::class)
+            ->getForm()
+        ;
 
-    /**
-     * @Route("/custom/{slug?}", name="custom")
-     * @param Request $request
-     * @return Response
-     */
+        $form->handleRequest($request);
+        $car = null;
+        if($form->isSubmitted() && $form->isValid()) {
 
-    public function custom(Request $request){
-        $slug = $request->get('slug');
-
-        return $this->render('home/custom.html.twig', [
-            'slug' => $slug
+            $query = $request->request->get('form')['carShowroom'];
+            if ($query) {
+                $car = $carRepository->findBy(['id' => $query]);
+            }
+            dump($car);
+        }
+        return $this->render('home/index.html.twig',[
+            'form' => $form->createView(),
+            'cars' => $car,
         ]);
-    }
+   }
+
+//    /**
+//     * @Route("/select", name="select")
+//     */
+//   public function handleSelect(Request $request, CarRepository $carRepository){
+//
+//       $query = $request->request->get('form')['carShowroom'];
+//       if($query){
+//           $car = $carRepository->findBy(['id' => $query ]);
+//       }
+//        dump($car);
+//
+//       return $this->render('home/select.html.twig',[
+//           'cars' => $car
+//       ]);
+//   }
+
 
 }
