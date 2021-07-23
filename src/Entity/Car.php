@@ -44,6 +44,16 @@ class Car
      */
     private $color;
 
+    /**
+     * @ORM\Column(type="float")
+     */
+    private $mileage;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $image;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -109,8 +119,28 @@ class Car
         return $this;
     }
 
-    public function __toString()
+
+    public function getMileage(): ?float
     {
-        return $this->getColor();
+        return $this->mileage;
+    }
+
+    public function setMileage(float $mileage): self
+    {
+        $this->mileage = $mileage;
+
+        return $this;
+    }
+
+    public function getImage(): ?string
+    {
+        return $this->image;
+    }
+
+    public function setImage(string $image): self
+    {
+        $this->image = $image;
+
+        return $this;
     }
 }
