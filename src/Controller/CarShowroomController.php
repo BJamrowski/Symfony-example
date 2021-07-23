@@ -19,6 +19,7 @@ class CarShowroomController extends AbstractController
      */
     public function create(Request $request)
     {
+        $this->denyAccessUnlessGranted('ROLE_ADMIN', null, 'User tried to access a page without having ROLE_ADMIN');
         $car_showroom = new CarShowroom();
         $form = $this->createForm(CarShowroomType::class, $car_showroom);
 
