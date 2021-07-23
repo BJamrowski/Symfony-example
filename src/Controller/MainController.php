@@ -19,10 +19,10 @@ class MainController extends AbstractController
      */
     public function index(Request $request, CarRepository $carRepository)
     {
-        //$carShowroom = $carShowroomRepository->findAll();
         $form = $this->createFormBuilder(null)
             ->add('carShowroom',EntityType::class, [
                 'class'=>'App\Entity\CarShowroom',
+                'label'=>'Pick a car showroom'
             ])
             ->add('submit',SubmitType::class)
             ->getForm()
@@ -31,8 +31,9 @@ class MainController extends AbstractController
         $form->handleRequest($request);
         $car = null;
         if($form->isSubmitted() && $form->isValid()) {
-
             $query = $request->request->get('form')['carShowroom'];
+
+
             if ($query) {
                 $car = $carRepository->findBy(['id' => $query]);
             }
@@ -44,21 +45,14 @@ class MainController extends AbstractController
         ]);
    }
 
-//    /**
-//     * @Route("/select", name="select")
-//     */
-//   public function handleSelect(Request $request, CarRepository $carRepository){
-//
-//       $query = $request->request->get('form')['carShowroom'];
-//       if($query){
-//           $car = $carRepository->findBy(['id' => $query ]);
-//       }
-//        dump($car);
-//
-//       return $this->render('home/select.html.twig',[
-//           'cars' => $car
-//       ]);
-//   }
+    /**
+     * @Route("/car/{id}", name="singleCar")
+     */
+   public function goToCar(string $id, CarRepository $carRepository){
+       $car = $carRepository->findOneBy(['id' => $id]);
 
-
+       return $this->render('home/singleCar.html.twig',[
+           'car' => $car,
+       ]);
+   }
 }
