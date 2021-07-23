@@ -6,10 +6,11 @@ use App\Entity\Car;
 use App\Entity\CarShowroom;
 use App\Form\CarType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 /**
- * @Route("/car", name="car")
+ * @Route("/car", name="car.")
  */
 class CarController extends AbstractController
 {
@@ -20,14 +21,24 @@ class CarController extends AbstractController
     {
         $this->denyAccessUnlessGranted('ROLE_ADMIN', null, 'User tried to access a page without having ROLE_ADMIN');
         $car = new Car();
-        $car_showroom = new CarShowroom();
-        $car->getCarShowroom($car_showroom->getName());
         $form = $this->createForm(CarType::class, $car);
 
         $form->handleRequest($request);
         if($form->isSubmitted() && $form->isValid()){
             $car = $form->getData();
             $entityManager = $this->getDoctrine()->getManager();
+            /** @var UploadedFile $file */
+            $file = $request->files->get('car')['attachment'];
+            if($file){
+                $filename = md5(uniqid()) .'.'. $file->guessClientExtension();
+                $file->move(
+                    $this->getParameter('uploads_dir'),
+                    $filename
+                );
+
+               $car->setImage($filename);
+
+            }
             $entityManager->persist($car);
             $entityManager->flush();
             return $this->redirectToRoute('home');

@@ -1,33 +1,58 @@
 {% extends('base.html.twig') %}
-
+{% block head %}
+    {% block stylesheets %}
+        {{ parent() }}
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+        {% endblock %}
+    {% block javascripts %}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+        {% endblock %}
+<{% endblock %}
 {% block body %}
-{{ form(form) }}
+    {{ form(form) }}
     {% if cars %}
-        <table class="table">
-            <thead>
-            <tr>
-                <th scope="col">#</th>
-                <th scope="col">Model</th>
-                <th scope="col">Mark</th>
-                <th scope="col">Year</th>
-                <th scope="col">Color</th>
-                <th scope="col">View car</th>
-            </tr>
-            </thead>
-            <tbody>
-            {% for car in cars %}
-                <tr>
-                    <th scope="row">{{ car.id }}</th>
-                    <td>{{ car.model }}</td>
-                    <td>{{ car.mark }}</td>
-                    <td>{{ car.year|date("m/d/Y")}}</td>
-                    <td>{{ car.color }}</td>
-                    <td>
-                        <a href="{{ path('singleCar', {id: car.id}) }}">Go to</a>
-                    </td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
+        <div class="container">
+            <h2>Choose a car</h2>
+            <div id="myCarousel" class="carousel slide" data-ride="carousel">
+                <!-- Indicators -->
+                <!-- Wrapper for slides -->
+                <div class="carousel-inner">
+                    {% for car in cars %}
+                        {% if loop.index ==1 %}
+                            <div class="item active">
+                                <a href="{{ path('singleCar', {id: car.id}) }}"><img src = "{{ '/uploads/'~car.image }}" style="width:100%; height: 400px;"></a>
+                                <div class="carousel-caption d-none d-md-block">
+                                    <h3>{{ car.mark }}</h3>
+                                    <p>
+                                        {{ car.model }}
+                                    </p>
+                                </div>
+                            </div>
+                        {% endif %}
+                    <div class="item">
+                        <a href="{{ path('singleCar', {id: car.id}) }}"><img src = "{{ '/uploads/'~car.image }}" style="width:100%; height: 400px;"></a>
+                        <div class="carousel-caption d-none d-md-block">
+                            <h3>{{ car.mark }}</h3>
+                            <p>
+                                {{ car.model }}
+                            </p>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+                <!-- Left and right controls -->
+                <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+                    <span class="glyphicon glyphicon-chevron-left"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="right carousel-control" href="#myCarousel" data-slide="next">
+                    <span class="glyphicon glyphicon-chevron-right"></span>
+                    <span class="sr-only">Next</span>
+                </a>
+            </div>
+        </div>
+
+
     {% endif %}
 {% endblock %}
