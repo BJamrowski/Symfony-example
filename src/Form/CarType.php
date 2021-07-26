@@ -25,6 +25,7 @@ class CarType extends AbstractType
             ->add('mark')
             ->add('year')
             ->add('color')
+            ->add('Price')
             ->add('carShowroom',EntityType::class, [
                 'class'=>'App\Entity\CarShowroom',
             ])
