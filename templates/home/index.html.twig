@@ -10,6 +10,11 @@
         {% endblock %}
 <{% endblock %}
 {% block body %}
+    {% for message in app.flashes('notice') %}
+        <div class="flash-notice">
+            {{ message }}
+        </div>
+    {% endfor %}
     {{ form(form) }}
     {% if cars %}
         <div class="container">
