@@ -9,7 +9,9 @@
             <th scope="col">Mark</th>
             <th scope="col">Year</th>
             <th scope="col">Color</th>
+            <th scope="col">Price</th>
             <th scope="col">Mileage</th>
+            <th scope="col">Purchase</th>
         </tr>
         </thead>
         <tbody>
@@ -18,7 +20,9 @@
             <td>{{ car.mark }}</td>
             <td>{{ car.year|date("m/d/Y")}}</td>
             <td>{{ car.color }}</td>
+            <td>{{ car.Price }} PLN</td>
             <td>{{ car.mileage }} km</td>
+            <td><a class="nav-link" href="#">Add car</a></td>
         </tr>
         </tbody>
     </table>

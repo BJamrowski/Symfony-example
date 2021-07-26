@@ -50,9 +50,14 @@ class Car
     private $mileage;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $image;
+
+    /**
+     * @ORM\Column(type="float")
+     */
+    private $Price;
 
     public function getId(): ?int
     {
@@ -140,6 +145,18 @@ class Car
     public function setImage(string $image): self
     {
         $this->image = $image;
+
+        return $this;
+    }
+
+    public function getPrice(): ?float
+    {
+        return $this->Price;
+    }
+
+    public function setPrice(float $Price): self
+    {
+        $this->Price = $Price;
 
         return $this;
     }
