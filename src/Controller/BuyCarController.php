@@ -13,8 +13,6 @@ class BuyCarController extends AbstractController
      */
     public function index(): Response
     {
-
-
         return $this->render('buy_car/index.html.twig', [
             'controller_name' => 'BuyCarController',
         ]);
