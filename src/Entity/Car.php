@@ -59,6 +59,11 @@ class Car
      */
     private $Price;
 
+    /**
+     * @ORM\OneToOne(targetEntity=Sell::class, mappedBy="car", cascade={"persist", "remove"})
+     */
+    private $sell;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -157,6 +162,23 @@ class Car
     public function setPrice(float $Price): self
     {
         $this->Price = $Price;
+
+        return $this;
+    }
+
+    public function getSell(): ?Sell
+    {
+        return $this->sell;
+    }
+
+    public function setSell(Sell $sell): self
+    {
+        // set the owning side of the relation if necessary
+        if ($sell->getCar() !== $this) {
+            $sell->setCar($this);
+        }
+
+        $this->sell = $sell;
 
         return $this;
     }
