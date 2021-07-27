@@ -6,8 +6,8 @@ use App\Entity\Car;
 use App\Entity\Salary;
 use App\Entity\SalesDoc;
 use App\Entity\Sell;
-use App\Form\CarType;
 use App\Form\SalaryType;
+use DateTime;
 use Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -39,7 +39,7 @@ class SalaryController extends AbstractController
 
             $sell = new Sell();
             $sell
-                ->setSellDate(new \DateTime($salary->getSellDate()))
+                ->setSellDate(new DateTime($salary->getSellDate()))
                 ->setPaymentMethod($salary->getPaymentMethods())
                 ->setUsername($salary->getUsername())
                 ->setPhoneNumber($salary->getPhoneNumber())
