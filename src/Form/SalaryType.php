@@ -28,7 +28,7 @@ class SalaryType extends AbstractType
                     ],
                     'expanded' => true
                 ])
-            ->add('username')
+ //           ->add('username')
             ->add('phoneNumber')
             ->add('salesDocNumber')
             ->add('name')
@@ -37,7 +37,7 @@ class SalaryType extends AbstractType
 //                'empty_data' => '27.07.2021',
 //                'mapped' => false
 //            ])
-            ->add('price')
+ //           ->add('price')
             ->add('submit',SubmitType::class);
     }
 

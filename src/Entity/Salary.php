@@ -53,7 +53,6 @@ class Salary
     protected $surname;
 
     /**
-     * @Assert\NotBlank()
      * @Assert\Date()
      * @var string A "d-m-Y" formatted value
      */
