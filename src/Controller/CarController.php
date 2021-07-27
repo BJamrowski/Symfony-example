@@ -37,6 +37,7 @@ class CarController extends AbstractController
                 );
 
                $car->setImage($filename);
+               $car->setAvailability(true);
 
             }
             $entityManager->persist($car);

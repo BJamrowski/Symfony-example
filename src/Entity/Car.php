@@ -64,6 +64,11 @@ class Car
      */
     private $sell;
 
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $availability;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -179,6 +184,18 @@ class Car
         }
 
         $this->sell = $sell;
+
+        return $this;
+    }
+
+    public function getAvailability(): ?bool
+    {
+        return $this->availability;
+    }
+
+    public function setAvailability(bool $availability): self
+    {
+        $this->availability = $availability;
 
         return $this;
     }

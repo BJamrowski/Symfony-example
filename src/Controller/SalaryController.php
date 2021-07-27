@@ -8,6 +8,7 @@ use App\Entity\SalesDoc;
 use App\Entity\Sell;
 use App\Form\CarType;
 use App\Form\SalaryType;
+use Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -17,7 +18,7 @@ class SalaryController extends AbstractController
 {
     /**
      * @Route("/salary/{slug}", name="salary")
-     * @throws \Exception
+     * @throws Exception
      */
     public function index(Request $request, int $slug): Response
     {
@@ -52,11 +53,15 @@ class SalaryController extends AbstractController
                 ->setPrice($salary->getPrice())
                 ->setSell($sell);
 
+            $car->setAvailability(false);
+
             $em = $this->getDoctrine()->getManager();
+            $em->persist($car);
             $em->persist($sell);
             $em->persist($salesDoc);
 
             $em->flush();
+
             $this->redirectToRoute('home');
         }
         return $this->render('salary/index.html.twig', [

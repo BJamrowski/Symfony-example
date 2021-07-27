@@ -9,6 +9,7 @@ use App\Entity\Salary;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\RadioType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -19,7 +20,11 @@ class SalaryType extends AbstractType
 
     public function buildForm(FormBuilderInterface $builder, array $options){
         $builder
-            ->add('sellDate')
+            ->add('name')
+            ->add('surname')
+            ->add('sellDate', DateType::class,[
+                'years' => range(date('Y')-10, date('Y')+20)
+            ])
             ->add('paymentMethods',ChoiceType::class,
                 [
                     'choices' => [
@@ -28,16 +33,13 @@ class SalaryType extends AbstractType
                     ],
                     'expanded' => true
                 ])
- //           ->add('username')
             ->add('phoneNumber')
             ->add('salesDocNumber')
-            ->add('name')
-            ->add('surname')
-//            ->add('dataSalesDoc', [
-//                'empty_data' => '27.07.2021',
-//                'mapped' => false
-//            ])
- //           ->add('price')
+            ->add('dataSalesDoc', DateType::class,[
+                'label' => 'Date of invoice',
+                'years' => range(date('Y')-10, date('Y')+20),
+                'mapped' => false
+            ])
             ->add('submit',SubmitType::class);
     }
 
