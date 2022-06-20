@@ -1,5 +1,3 @@
-# Trzej_muszkieterowie
-
 Aplikacja jest projektem stworzonym podczas odbywania praktyk w celu nauki 
 i zrozumienia jezyka PHP oraz frameworka Symfony.
 

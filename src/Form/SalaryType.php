@@ -40,6 +40,7 @@ class SalaryType extends AbstractType
                 'years' => range(date('Y')-10, date('Y')+20),
                 'mapped' => false
             ])
+            ->add('price')
             ->add('submit',SubmitType::class);
     }
 
